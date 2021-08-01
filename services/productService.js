@@ -27,7 +27,7 @@ function create(data) {
 
 async function getOne(id) {
 
-  let cube = await Cube.findById(id).lean();
+  let cube = await Cube.findById(id).populate('Accessories').lean();
 
   return cube;
 }
