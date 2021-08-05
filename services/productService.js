@@ -19,8 +19,8 @@ const Cube = require('../models/Cube');
     return searched;
 }
 
-function create(data) {
-    let cube = new Cube(data);
+function create(data, userId) {
+    let cube = new Cube({...data, creator: userId});
 
     return cube.save();
 }
@@ -33,9 +33,12 @@ async function getOne(id) {
 }
 
 function update(id, data) {
-    let cube = Cube.findByIdAndUpdate(id, data);
+    return Cube.updateOne({_id: id}, data);
 
-    return cube.save();
+}
+
+function deleteCube(id) {
+    return Cube.deleteOne({_id: id});
 }
 
 module.exports = {
@@ -43,5 +46,5 @@ module.exports = {
     create,
     getOne,
     update,
-
+    deleteCube
 }
