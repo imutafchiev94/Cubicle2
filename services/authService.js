@@ -13,12 +13,12 @@ const register = async ({username, password}) => {
     if(existingUser !== null) {
         throw ({message: 'User with this username already exists'})
     }
-        let salt = await bcrypt.genSalt(SALT_ROUNDS);
-        let hash = await bcrypt.hash(password,salt);
+        // let salt = await bcrypt.genSalt(SALT_ROUNDS);
+        // let hash = await bcrypt.hash(password,salt);
 
 
         
-        const user = new User({username, password: hash});
+        const user = new User({username, password});
 
         return await user.save();
     

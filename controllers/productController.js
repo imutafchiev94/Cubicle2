@@ -9,10 +9,10 @@ router.get('/create', isAuthenticated, (req, res) => {
     res.render('create', {title: 'Add Cube'});
 })
 
-router.post('/create', isAuthenticated,  (req, res) => {
+router.post('/create', isAuthenticated,  (req, res, next) => {
     productService.create(req.body, req.user)
-    .then(res.redirect('/'))
-    .catch(res.status(500));
+    .then(() => res.redirect('/'))
+    .catch(next);
 })
 
 router.get('/details/:id', async (req, res) => {
